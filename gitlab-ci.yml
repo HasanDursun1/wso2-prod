@@ -1,0 +1,22 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build-image
+  - push-image
+
+build-image-job:
+  stage: build-image
+  script:
+    - echo "Building the IMAGE..."
+    - echo "Build IMAGE completed successfully!"
+    - docker info
+    - echo $CI_REGISTRY
+    - echo $CI_DEPLOY_USER
+    - echo $CI_DEPLOY_PASSWORD
+    - docker login $CI_REGISTRY -u $CI_DEPLOY_USER --password-stdin <<< $CI_DEPLOY_PASSWORD
+    - docker build --force-rm=true --no-cache=true -t $CI_REGISTRY/tei_group/tei-wso2-prod-infra/volthread/teiwso2-prod:latest -f Dockerfile .
+
+push-image-job:
+  stage: push-image
+  script:
+    - echo "Pushing the IMAGE..."
+    - echo "Push IMAGE completed successfully!"
+    - docker push $CI_REGISTRY/tei_group/tei-wso2-prod-infra/volthread/teiwso2-prod:latest

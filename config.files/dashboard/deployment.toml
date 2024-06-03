@@ -1,0 +1,20 @@
+[server_config]
+port = 9743
+
+[heartbeat_config]
+pool_size = 15
+
+[mi_user_store]
+username = "admin"
+password = "admin"
+
+[keystore]
+file_name = "conf/security/dashboard.jks"
+password = "wso2carbon"
+key_password = "wso2carbon"
+
+#[dashboard_config]
+#dashboard_url = "https://localhost:9743/dashboard/api/"
+#heartbeat_interval = 5
+#group_id = "mi_dev"
+#node_id = "dev_node_2"

@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    container_name: wso2-postgres
+    environment:
+      POSTGRES_DB: wso
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+	  
+wso2mi:
+
+image: volthread/teiwso2-prod:latest
+    container_name: teiwso2-prodcon01
+    ports:
+      - "9743:9743
+    environment:
+      - DATABASE_HOST=localhost
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=wso
+      - DATABASE_USER=tei
+      - DATABASE_PASSWORD=welcome1
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge
